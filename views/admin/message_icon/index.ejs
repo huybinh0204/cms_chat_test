@@ -1,0 +1,41 @@
+<% include ../index1.ejs %>
+<!-- Page Heading -->
+<h1 class="h3 mb-2 text-gray-800"><%= title %></h1>
+<div class="card shadow mb-4">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Loại icon</th>
+                    <th>Ảnh icon</th>
+                    <th>Tên icon</th>
+                    <th>Hành động</th>
+                </tr>
+                </thead>
+                <tfoot>
+                <tr>
+                    <th>STT</th>
+                    <th>Loại icon</th>
+                    <th>Ảnh icon</th>
+                    <th>Tên icon</th>
+                    <th>Hành động</th>
+                </tr>
+                </tfoot>
+                <tbody>
+                <% message_iconn.forEach(function(item) { %>
+                    <tr>
+                        <td><%= item.id %></td>
+                        <td><%= item.category_icon %></td>
+                        <td><%= item.link_notifi_icon %></td>
+                        <td><%= item.name %></td>
+                        <td></td>
+                    </tr>
+                <% }); %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<% include ../index2.ejs %>
