@@ -16,4 +16,56 @@ router.get('/', function(req, res, next) {
     })
 });
 
+// View thêm mới
+router.get('/add/', function (req, res, next) {
+    res.render('admin/system_bulletin/add', {title: 'Admin'});
+});
+router.post('/add-create', function (req, res, next) {
+    var content = req.body.content;
+    var sql = `INSERT INTO new_post (content) VALUES ("${content}")`;
+    db.query(sql, function(err, result) {
+        if(err) {
+            res.status(500).send({ error: 'Something failed!' })
+        }
+        res.redirect('/admin/system_bulletin/');
+    })
+});
+// View thêm Sửa lại
+router.get('/edit/:id', function(req, res, next) {
+    var id = req.params.id;
+    console.log(id);
+    var sql = `SELECT * FROM new_post WHERE id=${id}`;
+    db.query(sql, function(err, rows, fields) {
+        if(err) {
+            res.status(500).send({ error: 'Something failed!' })
+        }
+        res.render('admin/system_bulletin/edit', {title: 'Admin', edit_new_post:rows[0]});
+        // res.render('admin/department/edit', {title: 'Admin'});
+        // res.json(rows[0])
+    })
+// res.render('admin/department/edit', {title: 'Admin'});
+});
+router.post('/edit_create/:id', function(req, res, next) {
+    var id = req.params.id;
+    var content = req.body.content;
+    var sql = `UPDATE new_post SET content="${content}" WHERE id=${id}`;
+    console.log(sql);
+    db.query(sql, function(err, result) {
+        if(err) {
+            res.status(500).send({ error: 'Somthing failed!' })
+        }
+        res.redirect('/admin/system_bulletin/');
+    })
+});
+router.get('/delete/:id', function(req, res, next) {
+    var id = req.params.id;
+    var sql = `DELETE FROM new_post WHERE id=${id}`;
+    db.query(sql, function(err,result) {
+        if(err) {
+            res.status(500).send({ error: 'Something failed!' })
+        }
+        res.redirect('/admin/system_bulletin/');
+    });
+})
+
 module.exports = router;
