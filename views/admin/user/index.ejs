@@ -12,9 +12,9 @@
                     <th>SĐT</th>
                     <th>Phòng ban</th>
                     <th>Mã nhân viên</th>
-                    <th>Email </th>
-                    <th>Địa chỉ </th>
-                    <th>Ngày sinh  </th>
+                    <th>Email</th>
+                    <th>Địa chỉ</th>
+                    <th>Ngày sinh</th>
                     <th>Trạng thái</th>
                     <th>Hành động</th>
                 </tr>
@@ -26,9 +26,9 @@
                     <th>SĐT</th>
                     <th>Phòng ban</th>
                     <th>Mã nhân viên</th>
-                    <th>Email </th>
-                    <th>Địa chỉ </th>
-                    <th>Ngày sinh  </th>
+                    <th>Email</th>
+                    <th>Địa chỉ</th>
+                    <th>Ngày sinh</th>
                     <th>Trạng thái</th>
                     <th>Hành động</th>
                 </tr>
@@ -45,10 +45,25 @@
                         <td><%= item.address %></td>
                         <td><%= item.birthday %></td>
                         <td><%= item.status %></td>
-                        <td>
-                            <a href="javascript:void(0);" onclick="confirmDelete('/admin/department/delete/<%= item.id %>','<%= item.name_department %>')"
-                               class="bt"><button type="button" class="btn btn-info  btn-user ">Cập nhật</button></a>
-                        </td>
+                        <form class="user" action="/admin/user/edit_create/<%= item.id %>" method="post">
+                            <td>
+                                <% var a = item.status %>
+                                <% if (a == 1){ %>
+                                    <select name="status" class="btn-success">
+                                        <option value="1">Mở</option>
+                                        <option value="2">Khóa</option>
+                                    </select>
+                                <% }else { %>
+                                    <select name="status" class="btn-danger">
+                                        <option value="2"><p style="background-color: #ca2819">Khóa</p></option>
+                                        <option value="1">Mở</option>
+                                    </select>
+                                <% } %>
+                            </td>
+                            <td>
+                                <button type="submit" class="btn btn-primary btn-user">Cập nhật</button>
+                            </td>
+                        </form>
                     </tr>
                 <% }); %>
                 </tbody>
@@ -59,7 +74,7 @@
 <% include ../index2.ejs %>
 <script>
     function confirmDelete(url, catename) {
-        var conf = confirm(`Bạn có muốn xóa phòng ban? ${catename}`);
+        var conf = confirm(`Bạn có muốn cập nhật lại tài khoản? ${catename}`);
         if (conf == true) {
             window.location.href = url;
         }

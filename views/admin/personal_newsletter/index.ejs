@@ -35,8 +35,19 @@
                 <% personal_newslettern.forEach(function(item) { %>
                     <tr>
                         <td><%= item.id %></td>
-                        <td><%= item.user_id %></td>
-                        <td><%= item.privacy %></td>
+                        <td><%= item.username %></td>
+                        <td>
+                            <% var check_privacy = item.privacy;
+                            if (check_privacy == 1){ %>
+                                <p>Cá nhân</p>
+                            <% }else if(check_privacy == 2){ %>
+                                <p>Bạn bè</p>
+                            <% }else if(check_privacy == 3){ %>
+                                <p>Công khai</p>
+                            <% }else if(check_privacy == 4){ %>
+                                <p>Chia sẻ nhóm</p>
+                            <% } %>
+                        </td>
                         <td><%= item.image_album %></td>
                         <td><%= item.video_alum %></td>
                         <td><%= item.name_album %></td>

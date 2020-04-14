@@ -17,9 +17,9 @@
                     <th>image album</th>
                     <th>video album</th>
                     <th>Tên album</th>
-                    <th>Bày tỏ cảm xúc </th>
-                    <th>Nội dung </th>
-                    <th>Tên người thích </th>
+                    <th>Bày tỏ cảm xúc</th>
+                    <th>Nội dung</th>
+                    <th>Tên người thích</th>
                 </tr>
                 </thead>
                 <tfoot>
@@ -29,25 +29,41 @@
                     <th>image album</th>
                     <th>video album</th>
                     <th>Tên album</th>
-                    <th>Bày tỏ cảm xúc </th>
-                    <th>Nội dung </th>
-                    <th>Tên người thích </th>
+                    <th>Bày tỏ cảm xúc</th>
+                    <th>Nội dung</th>
+                    <th>Tên người thích</th>
                 </tr>
                 </tfoot>
                 <tbody>
                 <% new_postn.forEach(function(item) { %>
                     <tr>
                         <td><%= item.id %></td>
-                        <td><%= item.privacy %></td>
+                        <td>
+                            <% var check_privacy = item.privacy;
+                            if (check_privacy == 1){ %>
+                                <p>Cá nhân</p>
+                            <% }else if(check_privacy == 2){ %>
+                                <p>Bạn bè</p>
+                            <% }else if(check_privacy == 3){ %>
+                                <p>Công khai</p>
+                            <% }else if(check_privacy == 4){ %>
+                                <p>Chia sẻ nhóm</p>
+                            <% } %>
+                        </td>
                         <td><%= item.image_album %></td>
                         <td><%= item.video_alum %></td>
                         <td><%= item.name_album %></td>
                         <td><%= item.react %></td>
                         <td><%= item.content %></td>
                         <td><%= item.user_react %></td>
-                        <td><a href="/admin/system_bulletin/edit/<%= item.id %>"><button type="button" class="btn btn-info  btn-user ">Sửa</button></a></form>
-                            <a href="javascript:void(0);" onclick="confirmDelete('/admin/system_bulletin/delete/<%= item.id %>','<%= item.username %>')"
-                               class="bt"><button type="button" class="btn btn-danger  btn-user ">Xóa</button></a>
+                        <td><a href="/admin/system_bulletin/edit/<%= item.id %>">
+                                <button type="button" class="btn btn-info  btn-user ">Sửa</button>
+                            </a></form>
+                            <a href="javascript:void(0);"
+                               onclick="confirmDelete('/admin/system_bulletin/delete/<%= item.id %>','<%= item.username %>')"
+                               class="bt">
+                                <button type="button" class="btn btn-danger  btn-user ">Xóa</button>
+                            </a>
                         </td>
                     </tr>
                 <% }); %>
@@ -59,7 +75,7 @@
 <% include ../index2.ejs %>
 <script>
     function confirmDelete(url, catename) {
-        var conf = confirm(`Bạn có muốn xóa phòng ban? ${catename}`);
+        var conf = confirm(`Bạn có muốn xóa bản tin? ${catename}`);
         if (conf == true) {
             window.location.href = url;
         }

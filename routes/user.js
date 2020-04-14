@@ -19,5 +19,26 @@ router.get('/', function(req, res, next) {
 // router.get('/admin/', function(req, res, next) {
 //   res.render('admin/index', { title: 'Express' });
 // });
-
+// router.get('/edit_create/:id', function(req, res, next) {
+//     var id = req.params.id;
+//     var sql = `UPDATE user SET status="${status}" WHERE id=${id}`;
+//     db.query(sql, function(err,result) {
+//         if(err) {
+//             res.status(500).send({ error: 'Something failed!' })
+//         }
+//         res.redirect('/admin/system_bulletin/');
+//     });
+// })
+router.post('/edit_create/:id', function(req, res, next) {
+    var id = req.params.id;
+    var status = req.body.status;
+    var sql = `UPDATE user SET status="${status}" WHERE id=${id}`;
+    console.log(sql);
+    db.query(sql, function(err, result) {
+        if(err) {
+            res.status(500).send({ error: 'Somthing failed!' })
+        }
+        res.redirect('/admin/user/');
+    })
+});
 module.exports = router;

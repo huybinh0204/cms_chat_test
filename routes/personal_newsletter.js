@@ -6,7 +6,7 @@ router.use(bodyParser.json());
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    var sql1 = "SELECT * FROM new_post WHERE user_id > 0";
+    var sql1 = "SELECT * FROM `new_post` a JOIN `user` b ON a.`user_id` = b.`id` WHERE user_id > 0";
     db.query(sql1, function(err, rows, fields) {
         if (err) {
             res.status(500).send({ error: 'Something failed!' })
