@@ -5,7 +5,8 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="p-5">
-                <form class="user" action="/admin/system_bulletin/add-create/" method="post"   onsubmit="return validatedata()">
+                <form class="user" action="/admin/system_bulletin/add-create/" method="post"
+                      onsubmit="return validatedata()" enctype="multipart/form-data">
                     <div class="form-group row">
                         <div class="col-sm-2 mb-2 mb-sm-2">
                             <p>Phòng ban :</p>
@@ -29,7 +30,7 @@
                             <p>Upload Ảnh :</p>
                         </div>
                         <div class="col-sm-8 mb-8 mb-sm-8">
-                            <input type="file"  name="image_album"required/>
+                            <input type="file"  name="image_album" required/>
 <!--                            <div>-->
 <!--                                <label for="">Upload a Image</label>-->
 <!--                                <br>-->

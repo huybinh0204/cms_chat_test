@@ -1,10 +1,19 @@
 var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser');
-var multer = require('multer');
 var shortid=require('shortid');
 var db = require('../server');
+var multer = require('multer');
 router.use(bodyParser.json());
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './public/Image');
+
+    }, filename: function (req, file, cb) {
+        cb(null, shortid.generate() + "00" + file.originalname );
+    }
+});
+var upload = multer({ storage: storage });
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -22,9 +31,14 @@ router.get('/', function (req, res, next) {
 router.get('/add/', function (req, res, next) {
     res.render('admin/system_bulletin/add', {title: 'Admin'});
 });
-router.post('/add-create', function (req, res, next) {
+router.post('/add-create',upload.single('image_album'), function (req, res, next) {
+    var image_album = "http://localhost:3000/";
+    var name_file = req.file.path.replace('public','');
+    var image_album1 = "http://localhost:3000/Image/" + name_file.substr(6);
     var content = req.body.content;
-    var sql = `INSERT INTO new_post (content) VALUES ("${content}")`;
+    console.log(image_album);
+    console.log(image_album1);
+    var sql = `INSERT INTO new_post (content,image_album) VALUES ("${content}","${image_album1}")`;
     db.query(sql, function (err, result) {
         if (err) {
             res.status(500).send({error: 'Something failed!'})
